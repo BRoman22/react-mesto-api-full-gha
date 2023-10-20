@@ -1,0 +1,11 @@
+.form {
+  max-width: 358px;
+  padding-top: 60px;
+  margin: 0 auto;
+}
+
+@media (max-width: 879px) {
+  .form {
+    max-width: 260px;
+  }
+}
