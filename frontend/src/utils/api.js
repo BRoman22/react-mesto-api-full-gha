@@ -1,7 +1,7 @@
 import myToken from './myToken';
 
 const token = myToken;
-const url = 'https://nomoreparties.co/v1/cohort-71';
+const url = 'https://api-mesto.nomoredomainsrocks.ru';
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject());
 
 const request = (path, method, data) =>

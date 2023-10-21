@@ -1,4 +1,4 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'https://api-mesto.nomoredomainsrocks.ru';
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject());
 const localToken = localStorage.getItem('token');
 
