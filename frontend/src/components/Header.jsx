@@ -1,9 +1,12 @@
 import { Link, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Burger from './Burger';
 
-export default function Header({ email, signout }) {
+export default function Header({ signout }) {
   const [burgerMenu, setBurgerMenu] = useState(true);
+  const user = useContext(CurrentUserContext);
+  const email = user?.email;
 
   function handleClick() {
     setBurgerMenu(() => !burgerMenu);

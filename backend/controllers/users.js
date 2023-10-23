@@ -61,9 +61,10 @@ export const login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
         secure: true,
-        maxAge: 3600000 * 24 * 7,
+        maxAge: 3600000 * 24 * 7, // неделя
       });
-      return res.send({ token });
+      res.cookie('log', 'in', { maxAge: 3600000 * 24 * 7 });
+      return res.send({ message: 'Вы вошли в свой аккаунт' });
     })
     .catch(next);
 };
@@ -101,4 +102,10 @@ export const createUser = (req, res, next) => {
       }
       return next(err);
     });
+};
+
+export const logout = (req, res) => {
+  res.clearCookie('jwtKey');
+  res.clearCookie('log');
+  return res.send({ message: 'Вы вышли из своего аккаунта' });
 };

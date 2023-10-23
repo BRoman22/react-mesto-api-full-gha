@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import userRouter from './users';
-import cardRouter from './cards';
-import authRouter from './auth';
+import userRouter from './userRouter';
+import cardRouter from './cardRouter';
+import authRouter from './authRouter';
 import auth from '../middlewares/auth';
 import NotFound from '../errors/NotFound';
 

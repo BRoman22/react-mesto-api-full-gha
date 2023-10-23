@@ -16,65 +16,49 @@ import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 import * as api from '../utils/api';
-import * as auth from '../utils/auth';
+// import * as auth from '../utils/auth';
 
 export default function App() {
-  //auth
-  const localLoggedIn = JSON.parse(localStorage.getItem('isLogged'));
-  const [loggedIn, setLoggedIn] = useState(localLoggedIn);
-  const [email, setEmail] = useState(null);
-
-  function toggleLoggedIn() {
-    setLoggedIn(!loggedIn);
-    localStorage.setItem('isLogged', JSON.stringify(!localLoggedIn));
-  }
-
-  function getContent() {
-    api.getUserInfo().then(setCurrentUser).catch(api.getError);
-    api.getCardList().then(setCards).catch(api.getError);
-  }
+  const login = document.cookie === 'log=in';
+  const [loggedIn, setLoggedIn] = useState(login);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [cards, setCards] = useState(null);
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      auth
-        .checkToken()
+    if (loggedIn) {
+      api
+        .getUserInfo()
         .then((res) => {
-          setEmail(res.data.email);
-          getContent();
+          setCurrentUser(res);
+          api.getCardList().then(setCards).catch(api.getError);
         })
-        .catch(toggleLoggedIn);
+        .catch(api.getError);
     }
-  }, []);
+  }, [loggedIn]);
 
+  //auth
   function handleRegister(email, password) {
-    auth
+    api
       .register({ email, password })
       .then(() => setPopup({ ...popup, infoTooltipSuccess: true }))
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
   }
 
   function handleLogin(email, password) {
-    auth
+    api
       .login({ email, password })
-      .then((res) => {
-        localStorage.setItem('token', res.token);
-        setEmail(email);
-        getContent();
-        toggleLoggedIn();
-      })
+      .then(() => setLoggedIn(!loggedIn))
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
   }
 
   function handleSignout() {
-    setEmail('');
-    localStorage.removeItem('token');
-    toggleLoggedIn();
+    api
+      .logout()
+      .then(() => setLoggedIn(!loggedIn))
+      .catch(api.getError);
   }
 
   //submits
-  const [currentUser, setCurrentUser] = useState(null);
-  const [cards, setCards] = useState(null);
-
   const [buttonText, setButtonText] = useState({
     user: 'Сохранить',
     card: 'Создать',
@@ -136,7 +120,11 @@ export default function App() {
   function handleToggleCardLike(card, isLiked) {
     api
       .toggleLike(card._id, isLiked)
-      .then((newCard) => setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c))))
+      .then((newCard) =>
+        setCards((cards) =>
+          cards.map((c) => (c._id === card._id ? newCard : c)),
+        ),
+      )
       .catch(api.getError);
   }
 
@@ -185,12 +173,12 @@ export default function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentCardContext.Provider value={cards}>
-        <div className="page">
-          <div className="page__content">
-            <Header email={email} signout={handleSignout} />
+        <div className='page'>
+          <div className='page__content'>
+            <Header signout={handleSignout} />
             <Routes>
               <Route
-                path="/"
+                path='/'
                 element={
                   <ProtectedRoute loggedIn={loggedIn}>
                     <Main
@@ -207,10 +195,18 @@ export default function App() {
                 }
               />
               {!loggedIn && (
-                <Route path="/signup" element={<Register onRegister={handleRegister} />} />
+                <Route
+                  path='/signup'
+                  element={<Register onRegister={handleRegister} />}
+                />
               )}
-              {!loggedIn && <Route path="/signin" element={<Login onLogin={handleLogin} />} />}
-              <Route path="*" element={<Navigate to="/" replace />} />
+              {!loggedIn && (
+                <Route
+                  path='/signin'
+                  element={<Login onLogin={handleLogin} />}
+                />
+              )}
+              <Route path='*' element={<Navigate to='/' replace />} />
             </Routes>
             <EditProfilePopup
               isOpen={popup.profile}
@@ -236,7 +232,11 @@ export default function App() {
               onDeleteCard={handleCardDelete}
               buttonText={buttonText.confirmation}
             />
-            <ImagePopup isOpen={popup.image} onClose={closeAllPopups} card={cardData} />
+            <ImagePopup
+              isOpen={popup.image}
+              onClose={closeAllPopups}
+              card={cardData}
+            />
             <InfoTooltip
               success={popup.infoTooltipSuccess}
               fail={popup.infoTooltipFail}

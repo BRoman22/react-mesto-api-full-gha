@@ -1,14 +1,13 @@
-import myToken from './myToken';
-
-const token = myToken;
 const url = 'https://api-mesto.nomoredomainsrocks.ru';
+// const url = 'http://localhost:3000'; //dev
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject());
 
 const request = (path, method, data) =>
   fetch(`${url}/${path}`, {
     method: method,
-    headers: { authorization: token, 'Content-Type': 'application/json' },
-    body: data && JSON.stringify(data),
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
   }).then(checkResponse);
 
 export const getUserInfo = () => request('users/me');
@@ -27,3 +26,9 @@ export const addNewCard = (data) => request('cards', 'POST', data);
 export const deleteCard = (id) => request(`cards/${id}`, 'DELETE');
 
 export const getError = (err) => alert(err);
+// auth
+export const register = (data) => request('signup', 'POST', data);
+
+export const login = (data) => request('signin', 'POST', data);
+
+export const logout = () => request('signout', 'POST');
