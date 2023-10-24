@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.49.56
+IP 158.160.49.56
 
-Frontend https://mesto-site.nomoredomainsrocks.ru
+Frontend https://mesto.nomoredomainsrocks.ru
 
-Backend https://api-mesto.nomoredomainsrocks.ru
+Backend https://api.mesto.nomoredomainsrocks.ru
