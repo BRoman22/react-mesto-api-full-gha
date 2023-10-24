@@ -20,10 +20,12 @@ app.use(
     origin: [
       'https://mesto.nomoredomainsrocks.ru',
       'http://mesto.nomoredomainsrocks.ru',
+      'http://localhost:3000',
+      'https://localhost:3000',
     ],
     credentials: true,
     maxAge: 60,
-  }),
+  })
 );
 
 app.use(limiter);
