@@ -61,7 +61,7 @@ export const login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
         secure: true,
-        maxAge: 3600000 * 24 * 7, // неделя
+        maxAge: 3600 * 24 * 7, // неделя
       });
       res.cookie('log', 'in', { maxAge: 3600000 * 24 * 7 });
       return res.send({ message: 'Вы вошли в свой аккаунт' });
