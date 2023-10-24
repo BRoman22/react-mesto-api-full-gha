@@ -23,8 +23,10 @@ app.use(
       'http://localhost:3000',
       'https://localhost:3000',
     ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     maxAge: 60,
+    allowedHeaders: ['sessionId', 'Content-Type', 'Authorization', 'authorization'],
   })
 );
 
