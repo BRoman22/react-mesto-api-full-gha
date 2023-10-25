@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP 158.160.49.56
+IP  158.160.49.56
 
 Frontend https://mesto.nomoredomainsrocks.ru
 
