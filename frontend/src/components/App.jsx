@@ -20,7 +20,7 @@ import * as api from '../utils/api';
 
 export default function App() {
   const login = document.cookie === 'log=in';
-  const [loggedIn, setLoggedIn] = useState(login);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState(null);
 

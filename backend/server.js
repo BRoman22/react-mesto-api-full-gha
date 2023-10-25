@@ -9,9 +9,8 @@ const {
 mongoose
   .connect(MONGO_URL)
   .then(() => {
-    console.log('');
-    console.log('Mongo connect');
     app.listen(PORT);
+    console.log('');
     console.log(`App listening on port ${PORT}`);
   })
   .catch(() => console.log('Mongo don`t connect'));
