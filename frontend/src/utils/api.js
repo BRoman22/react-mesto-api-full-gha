@@ -6,11 +6,11 @@ const token = localStorage.getItem('token');
 const request = (path, method, data) =>
   fetch(`${url}/${path}`, {
     method: method,
-    credentials: 'include',
+    // credentials: 'include',
     headers: {
-      'Accept': 'application/json',
+      // 'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      // 'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify(data),
   }).then(checkResponse);
@@ -34,6 +34,17 @@ export const getError = (err) => alert(err);
 // auth
 export const register = (data) => request('signup', 'POST', data);
 
-export const login = (data) => request('signin', 'POST', data);
+// export const login = (data) => request('signin', 'POST', data);
+export const login = (path = 'signin', method = 'POST', data) =>
+  fetch(`${url}/${path}`, {
+    method: method,
+    credentials: 'include',
+    headers: {
+      // 'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  }).then(checkResponse);
 
 export const logout = () => request('signout', 'POST');
