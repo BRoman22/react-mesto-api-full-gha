@@ -47,8 +47,8 @@ export default function App() {
   function handleLogin(email, password) {
     api
       .login({ email, password })
-      .then((res) => {
-        localStorage.setItem('token', res.token);
+      .then(() => {
+        // localStorage.setItem('token', res.token);
         setLoggedIn(!loggedIn)
       })
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
@@ -58,7 +58,7 @@ export default function App() {
     api
       .logout()
       .then(() => {
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
         setLoggedIn(!loggedIn)
       })
       .catch(api.getError);
