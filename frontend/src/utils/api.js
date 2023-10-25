@@ -1,5 +1,5 @@
-const url = 'https://api.mesto.nomoredomainsrocks.ru';
-// const url = 'http://localhost:3000'; //dev
+// const url = 'https://api.mesto.nomoredomainsrocks.ru';
+const url = 'http://localhost:3000'; //dev
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject());
 // const token = localStorage.getItem('token');
 

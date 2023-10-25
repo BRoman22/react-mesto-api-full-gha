@@ -19,10 +19,15 @@ import * as api from '../utils/api';
 // import * as auth from '../utils/auth';
 
 export default function App() {
-  const login = document.cookie === 'log=in';
+  const login = JSON.parse(localStorage.getItem('login'));
   const [loggedIn, setLoggedIn] = useState(login);
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState(null);
+
+    function toggleLoggedIn() {
+    setLoggedIn(!loggedIn);
+    localStorage.setItem('login', JSON.stringify(!login));
+  }
 
   useEffect(() => {
     if (loggedIn) {
@@ -47,14 +52,14 @@ export default function App() {
   function handleLogin(email, password) {
     api
       .login({ email, password })
-      .then(() => setLoggedIn(!loggedIn))
+      .then(() => toggleLoggedIn())
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
   }
 
   function handleSignout() {
     api
       .logout()
-      .then(() => setLoggedIn(!loggedIn))
+      .then(() => toggleLoggedIn())
       .catch(api.getError);
   }
 
