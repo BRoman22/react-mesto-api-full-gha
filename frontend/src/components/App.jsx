@@ -20,7 +20,7 @@ import * as api from '../utils/api';
 
 export default function App() {
   const login = document.cookie === 'log=in';
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(login);
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState(null);
 
@@ -47,14 +47,20 @@ export default function App() {
   function handleLogin(email, password) {
     api
       .login({ email, password })
-      .then(() => setLoggedIn(!loggedIn))
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        setLoggedIn(!loggedIn)
+      })
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
   }
 
   function handleSignout() {
     api
       .logout()
-      .then(() => setLoggedIn(!loggedIn))
+      .then(() => {
+        localStorage.removeItem('token');
+        setLoggedIn(!loggedIn)
+      })
       .catch(api.getError);
   }
 
