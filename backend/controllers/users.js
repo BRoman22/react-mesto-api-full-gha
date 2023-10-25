@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import User from '../models/user';
-import NotFound from '../errors/NotFound';
-import Conflict from '../errors/Conflict';
+import User from '../models/user.js';
+import NotFound from '../errors/NotFound.js';
+import Conflict from '../errors/Conflict.js';
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 

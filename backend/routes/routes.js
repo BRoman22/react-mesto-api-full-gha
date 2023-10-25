@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import userRouter from './userRouter';
-import cardRouter from './cardRouter';
-import authRouter from './authRouter';
-import auth from '../middlewares/auth';
-import NotFound from '../errors/NotFound';
+import userRouter from './userRouter.js';
+import cardRouter from './cardRouter.js';
+import authRouter from './authRouter.js';
+import auth from '../middlewares/auth.js';
+import NotFound from '../errors/NotFound.js';
 
 const routes = Router();
 

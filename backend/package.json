@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --es-module-specifier-resolution=node server.js",
+    "start": "node server.js",
     "dev": "nodemon --es-module-specifier-resolution=node --inspect -- server.js",
     "lint": "npx eslint .",
     "db-start": "brew services start mongodb-community@4.4",

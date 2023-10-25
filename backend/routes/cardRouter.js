@@ -4,14 +4,14 @@ import {
   deleteCardValidation,
   cardLikeValidation,
   cardDislikeValidation,
-} from '../middlewares/requestValidation';
+} from '../middlewares/requestValidation.js';
 import {
   getCards,
   createCards,
   deleteCard,
   cardLike,
   cardDislike,
-} from '../controllers/cards';
+} from '../controllers/cards.js';
 
 const cardRouter = Router();
 

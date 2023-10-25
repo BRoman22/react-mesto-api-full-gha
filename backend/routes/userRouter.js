@@ -3,14 +3,14 @@ import {
   getUserByIdValidation,
   updateUserProfileValidation,
   updateUserAvatarValidation,
-} from '../middlewares/requestValidation';
+} from '../middlewares/requestValidation.js';
 import {
   getUsers,
   getCurrentUserInfo,
   getUserById,
   userUpdateProfile,
   userUpdateAvatar,
-} from '../controllers/users';
+} from '../controllers/users.js';
 
 const userRouter = Router();
 

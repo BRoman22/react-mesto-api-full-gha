@@ -2,8 +2,8 @@ import { Router } from 'express';
 import {
   createUserValidation,
   loginValidation,
-} from '../middlewares/requestValidation';
-import { createUser, login, logout } from '../controllers/users';
+} from '../middlewares/requestValidation.js';
+import { createUser, login, logout } from '../controllers/users.js';
 
 const authRouter = Router();
 

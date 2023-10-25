@@ -1,5 +1,5 @@
 import { rateLimit } from 'express-rate-limit';
-import TooManyRequests from '../errors/TooManyRequests';
+import TooManyRequests from '../errors/TooManyRequests.js';
 
 const limiter = rateLimit({
   limit: 153,

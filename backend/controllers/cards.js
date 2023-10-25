@@ -1,6 +1,6 @@
-import Card from '../models/card';
-import Forbidden from '../errors/Forbidden';
-import NotFound from '../errors/NotFound';
+import Card from '../models/card.js';
+import Forbidden from '../errors/Forbidden.js';
+import NotFound from '../errors/NotFound.js';
 
 export const getCards = (req, res, next) => {
   Card.find({})

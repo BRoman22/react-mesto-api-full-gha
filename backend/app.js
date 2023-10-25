@@ -4,10 +4,10 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { errors } from 'celebrate';
 import cors from 'cors';
-import limiter from './middlewares/rateLimiter';
-import { requestLogger, errorLogger } from './middlewares/logger';
-import errorHandler from './middlewares/errorHandler';
-import routes from './routes/routes';
+import limiter from './middlewares/rateLimiter.js';
+import { requestLogger, errorLogger } from './middlewares/logger.js';
+import errorHandler from './middlewares/errorHandler.js';
+import routes from './routes/routes.js';
 
 const app = express();
 
@@ -26,8 +26,13 @@ app.use(
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     maxAge: 60,
-    allowedHeaders: ['sessionId', 'Content-Type', 'Authorization', 'authorization'],
-  })
+    allowedHeaders: [
+      'sessionId',
+      'Content-Type',
+      'Authorization',
+      'authorization',
+    ],
+  }),
 );
 
 app.use(limiter);
