@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ['https://mesto.nomoredomainsrocks.ru', 'https://localhost:3000'],
+    origin: ['https://mesto.nomoredomainsrocks.ru', 'http://mesto.nomoredomainsrocks.ru'],
     credentials: true,
     maxAge: 60,
     allowedHeaders: ['Content-Type', 'Authorization'],
