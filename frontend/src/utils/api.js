@@ -10,7 +10,7 @@ const request = (path, method, data) =>
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': token
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(data),
   }).then(checkResponse);
