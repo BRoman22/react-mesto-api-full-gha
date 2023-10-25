@@ -8,7 +8,7 @@ export default function auth(req, res, next) {
   // const { jwtKey } = req.cookies;
   const { Authorization } = req.headers;
 
-  if (Authorization && Authorization.startsWith('Bearer ')) {
+  if ((Authorization && Authorization.startsWith('Bearer '))) {
     const token = Authorization.replace('Bearer ', '');
     const secret = NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret';
     let payload;
@@ -23,7 +23,7 @@ export default function auth(req, res, next) {
       return next(new Unauthorized('Необходима авторизация'));
     }
 
-    req.user = { _id: payload._id };
+    req.user = payload;
     next();
   } else {
     return next(new Unauthorized('Необходима авторизация'));
