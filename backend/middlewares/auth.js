@@ -5,11 +5,11 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 // eslint-disable-next-line consistent-return
 export default function auth(req, res, next) {
-  const { jwtKey } = req.cookies;
+  // const { jwtKey } = req.cookies;
   const { authorization } = req.headers;
 
-  if (jwtKey || (authorization && authorization.startsWith('Bearer '))) {
-    const token = jwtKey || authorization.replace('Bearer ', '');
+  if (authorization && authorization.startsWith('Bearer ')) {
+    const token = authorization.replace('Bearer ', '');
     const secret = NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret';
     let payload;
     // if (jwtKey) {
