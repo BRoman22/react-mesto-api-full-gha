@@ -37,7 +37,8 @@ export const cardLike = (req, res, next) => {
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true },
-  ).populate('likes')
+  )
+    // .populate('likes')
     .then((card) => {
       if (!card) {
         return next(new NotFound('Карточка с указанным _id не найдена'));
