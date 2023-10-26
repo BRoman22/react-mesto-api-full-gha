@@ -57,13 +57,13 @@ export const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret',
         { expiresIn: '7d' },
       );
-      // res.cookie('jwtKey', token, {
-      //   httpOnly: true,
-      //   sameSite: true,
-      //   secure: true,
-      //   maxAge: 3600000 * 24 * 7, // неделя
-      // });
-      return res.send({ message: 'Вы вошли в свой аккаунт', token });
+      res.cookie('jwtKey', token, {
+        httpOnly: true,
+        sameSite: true,
+        secure: true,
+        maxAge: 3600000 * 24 * 7, // неделя
+      });
+      return res.send({ message: 'Вы вошли в свой аккаунт' });
     })
     .catch(next);
 };

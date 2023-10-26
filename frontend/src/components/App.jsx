@@ -52,20 +52,14 @@ export default function App() {
   function handleLogin(email, password) {
     api
       .login({ email, password })
-      .then((res) => {
-        localStorage.setItem('token', res.token);
-        toggleLoggedIn()
-      })
+      .then(() => toggleLoggedIn())
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
   }
 
   function handleSignout() {
     api
       .logout()
-      .then(() => {
-        localStorage.removeItem('token');
-        toggleLoggedIn()
-      })
+      .then(() => toggleLoggedIn())
       .catch(api.getError);
   }
 
