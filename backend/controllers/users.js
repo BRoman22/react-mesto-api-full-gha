@@ -24,9 +24,7 @@ export const getCurrentUserInfo = (req, res, next) => {
 export const getUserById = (req, res, next) => {
   User.findById(req.params.userId)
     .then((user) => {
-      if (!user) {
-        return next(new NotFound('Пользователь по указанному _id не найден'));
-      }
+      if (!user) return next(new NotFound('Пользователь по указанному _id не найден'));
       return res.send(user);
     })
     .catch(next);
@@ -41,7 +39,8 @@ export const userUpdateProfile = (req, res, next) => {
     .catch((err) => {
       if (err instanceof ValidationError) {
         next(new BadRequest('Некорректные данные при обновлении профиля'));
-      } else next(err);
+      }
+      next(err);
     });
 };
 
@@ -54,7 +53,8 @@ export const userUpdateAvatar = (req, res, next) => {
     .catch((err) => {
       if (err instanceof ValidationError) {
         next(new BadRequest('Некорректные данные при обновлении аватара'));
-      } else next(err);
+      }
+      next(err);
     });
 };
 

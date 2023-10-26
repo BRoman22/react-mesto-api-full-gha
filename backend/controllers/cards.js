@@ -19,19 +19,16 @@ export const createCards = (req, res, next) => {
     .catch((err) => {
       if (err instanceof ValidationError) {
         next(new BadRequest('Некорректные данные при создании карточки'));
-      } else next(err);
+      }
+      next(err);
     });
 };
 
 export const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
-      if (!card) {
-        return next(new NotFound('Карточка с указанным _id не найдена'));
-      }
-      if (card.owner.valueOf() !== req.user._id) {
-        return next(new Forbidden('Нет прав доступа'));
-      }
+      if (!card) return next(new NotFound('Карточка с указанным _id не найдена'));
+      if (card.owner.valueOf() !== req.user._id) return next(new Forbidden('Нет прав доступа'));
       return Card.deleteOne(card)
         .then(() => res.send({ message: 'Карточка удалена' }))
         .catch(next);
@@ -47,9 +44,7 @@ export const cardLike = (req, res, next) => {
   )
     // .populate('likes')
     .then((card) => {
-      if (!card) {
-        return next(new NotFound('Карточка с указанным _id не найдена'));
-      }
+      if (!card) return next(new NotFound('Карточка с указанным _id не найдена'));
       return res.send(card);
     })
     .catch(next);
@@ -62,9 +57,7 @@ export const cardDislike = (req, res, next) => {
     { new: true },
   )
     .then((card) => {
-      if (!card) {
-        return next(new NotFound('Карточка с указанным _id не найдена'));
-      }
+      if (!card) return next(new NotFound('Карточка с указанным _id не найдена'));
       return res.send(card);
     })
     .catch(next);
