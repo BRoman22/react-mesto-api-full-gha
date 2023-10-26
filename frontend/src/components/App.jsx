@@ -24,7 +24,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState(null);
 
-    function toggleLoggedIn() {
+  function toggleLoggedIn() {
     setLoggedIn(!loggedIn);
     localStorage.setItem('login', JSON.stringify(!login));
   }
@@ -52,14 +52,20 @@ export default function App() {
   function handleLogin(email, password) {
     api
       .login({ email, password })
-      .then(() => toggleLoggedIn())
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        toggleLoggedIn()
+      })
       .catch(() => setPopup({ ...popup, infoTooltipFail: true }));
   }
 
   function handleSignout() {
     api
       .logout()
-      .then(() => toggleLoggedIn())
+      .then(() => {
+        localStorage.removeItem('token');
+        toggleLoggedIn()
+      })
       .catch(api.getError);
   }
 

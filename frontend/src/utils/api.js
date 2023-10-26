@@ -1,7 +1,7 @@
-// const url = 'https://api.mesto.nomoredomainsrocks.ru';
-const url = 'http://localhost:3000'; //dev
+const url = 'https://api.mesto.nomoredomainsrocks.ru';
+// const url = 'http://localhost:3000'; //dev
 const checkResponse = (res) => (res.ok ? res.json() : Promise.reject());
-// const token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
 const request = (path, method, data) =>
   fetch(`${url}/${path}`, {
@@ -10,7 +10,7 @@ const request = (path, method, data) =>
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      // 'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify(data),
   }).then(checkResponse);
