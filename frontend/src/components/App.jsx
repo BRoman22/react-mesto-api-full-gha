@@ -31,13 +31,8 @@ export default function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      api
-        .getUserInfo()
-        .then((res) => {
-          setCurrentUser(res);
-          api.getCardList().then(setCards).catch(api.getError);
-        })
-        .catch(api.getError);
+      api.getUserInfo().then(setCurrentUser).catch(api.getError);
+      api.getCardList().then(setCards).catch(api.getError);
     }
   }, [loggedIn]);
 
