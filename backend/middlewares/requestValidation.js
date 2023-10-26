@@ -69,7 +69,7 @@ export const createCardValidation = celebrate({
   }),
 });
 
-export const deleteCardValidation = celebrate({
+export const checkCardId = celebrate({
   params: Joi.object().keys({
     cardId: Joi.string()
       .required()
@@ -77,21 +77,29 @@ export const deleteCardValidation = celebrate({
       .hex(),
   }),
 });
+// export const deleteCardValidation = celebrate({
+//   params: Joi.object().keys({
+//     cardId: Joi.string()
+//       .required()
+//       .length(24)
+//       .hex(),
+//   }),
+// });
 
-export const cardLikeValidation = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string()
-      .required()
-      .length(24)
-      .hex(),
-  }),
-});
+// export const cardLikeValidation = celebrate({
+//   params: Joi.object().keys({
+//     cardId: Joi.string()
+//       .required()
+//       .length(24)
+//       .hex(),
+//   }),
+// });
 
-export const cardDislikeValidation = celebrate({
-  params: Joi.object().keys({
-    cardId: Joi.string()
-      .required()
-      .length(24)
-      .hex(),
-  }),
-});
+// export const cardDislikeValidation = celebrate({
+//   params: Joi.object().keys({
+//     cardId: Joi.string()
+//       .required()
+//       .length(24)
+//       .hex(),
+//   }),
+// });

@@ -1,9 +1,12 @@
+import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/user.js';
+import BadRequest from '../errors/BadRequest.js';
 import NotFound from '../errors/NotFound.js';
 import Conflict from '../errors/Conflict.js';
 
+const { ValidationError } = mongoose.Error;
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 export const getUsers = (req, res, next) => {
@@ -35,7 +38,11 @@ export const userUpdateProfile = (req, res, next) => {
     runValidators: true,
   })
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err instanceof ValidationError) {
+        next(new BadRequest('Некорректные данные при обновлении профиля'));
+      } else next(err);
+    });
 };
 
 export const userUpdateAvatar = (req, res, next) => {
@@ -44,7 +51,11 @@ export const userUpdateAvatar = (req, res, next) => {
     runValidators: true,
   })
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err instanceof ValidationError) {
+        next(new BadRequest('Некорректные данные при обновлении аватара'));
+      } else next(err);
+    });
 };
 
 export const login = (req, res, next) => {
@@ -61,7 +72,7 @@ export const login = (req, res, next) => {
         httpOnly: true,
         sameSite: true,
         secure: true,
-        maxAge: 3600000 * 24 * 7, // неделя
+        maxAge: 3600000 * 24 * 7,
       });
       return res.send({ message: 'Вы вошли в свой аккаунт' });
     })
@@ -86,16 +97,17 @@ export const createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => {
-      res.status(201).send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        _id: user._id,
-      });
-    })
+    .then((user) => res.status(201).send({
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      email: user.email,
+      _id: user._id,
+    }))
     .catch((err) => {
+      if (err instanceof ValidationError) {
+        return next(new BadRequest('Некорректные данные при создании пользователя'));
+      }
       if (err.code === 11000) {
         return next(new Conflict('Такой пользователь уже существует'));
       }

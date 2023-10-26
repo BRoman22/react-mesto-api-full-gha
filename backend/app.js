@@ -24,7 +24,9 @@ app.use(
     ],
     credentials: true,
     maxAge: 60,
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type',
+      // 'Authorization'],
+    ],
   }),
 );
 

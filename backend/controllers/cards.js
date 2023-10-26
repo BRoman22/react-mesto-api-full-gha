@@ -1,6 +1,10 @@
+import mongoose from 'mongoose';
 import Card from '../models/card.js';
+import BadRequest from '../errors/BadRequest.js';
 import Forbidden from '../errors/Forbidden.js';
 import NotFound from '../errors/NotFound.js';
+
+const { ValidationError } = mongoose.Error;
 
 export const getCards = (req, res, next) => {
   Card.find({})
@@ -12,7 +16,11 @@ export const createCards = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(201).send(card))
-    .catch(next);
+    .catch((err) => {
+      if (err instanceof ValidationError) {
+        next(new BadRequest('Некорректные данные при создании карточки'));
+      } else next(err);
+    });
 };
 
 export const deleteCard = (req, res, next) => {
@@ -24,10 +32,9 @@ export const deleteCard = (req, res, next) => {
       if (card.owner.valueOf() !== req.user._id) {
         return next(new Forbidden('Нет прав доступа'));
       }
-      Card.deleteOne(card)
+      return Card.deleteOne(card)
         .then(() => res.send({ message: 'Карточка удалена' }))
         .catch(next);
-      return next;
     })
     .catch(next);
 };
