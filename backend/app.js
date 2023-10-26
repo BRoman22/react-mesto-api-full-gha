@@ -9,6 +9,13 @@ import { requestLogger, errorLogger } from './middlewares/logger.js';
 import errorHandler from './middlewares/errorHandler.js';
 import routes from './routes/routes.js';
 
+const corsAllowedOrigins = [
+  'https://mesto.nomoredomainsrocks.ru',
+  'http://mesto.nomoredomainsrocks.ru',
+  'http://localhost:3000',
+  // 'http://localhost:5173',
+];
+
 const app = express();
 
 app.use(helmet());
@@ -17,17 +24,10 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [
-      'https://mesto.nomoredomainsrocks.ru',
-      'http://mesto.nomoredomainsrocks.ru',
-      'http://localhost:3000',
-      // 'http://localhost:5173',
-    ],
+    origin: corsAllowedOrigins,
     credentials: true,
     maxAge: 60,
-    allowedHeaders: ['Content-Type',
-      // 'Authorization'],
-    ],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }),
 );
 

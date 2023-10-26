@@ -4,14 +4,16 @@ import Unauthorized from '../errors/Unauthorized.js';
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 export default function auth(req, res, next) {
-  const { jwtKey } = req.cookies;
-  const { authorization } = req.headers;
+  const { cookies } = req;
+  // const { authorization } = req.headers;
 
-  if (!jwtKey && (!authorization || !authorization.startsWith('Bearer '))) {
-    throw new Unauthorized('Необходима авторизация');
-  }
+  // if (!jwtKey && (!authorization || !authorization.startsWith('Bearer '))) {
+  //   throw new Unauthorized('Необходима авторизация');
+  // }
+  if (!cookies && !cookies.jwtKey) throw new Unauthorized('Необходима авторизация');
 
-  const token = jwtKey || authorization.replace('Bearer ', '');
+  // const token = jwtKey || authorization.replace('Bearer ', '');
+  const token = cookies.jwtKey;
   const secret = NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret';
 
   return jwt.verify(token, secret, (err, payload) => {
