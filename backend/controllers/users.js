@@ -74,8 +74,7 @@ export const login = (req, res, next) => {
         secure: true,
         maxAge: 3600000 * 24 * 7,
       });
-      // return res.send({ message: 'Вы вошли в свой аккаунт' });
-      return res.send({ token });
+      return res.send({ message: 'Вы вошли в свой аккаунт' });
     })
     .catch(next);
 };
