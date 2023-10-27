@@ -8,6 +8,7 @@ const { ValidationError } = mongoose.Error;
 
 export const getCards = (req, res, next) => {
   Card.find({})
+    .populate('likes')
     .then((cards) => res.send(cards.reverse()))
     .catch(next);
 };
@@ -42,7 +43,7 @@ export const cardLike = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    // .populate('likes')
+    .populate('likes')
     .then((card) => {
       if (!card) return next(new NotFound('Карточка с указанным _id не найдена'));
       return res.send(card);

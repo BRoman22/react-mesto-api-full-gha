@@ -11,7 +11,7 @@ import routes from './routes/routes.js';
 const corsAllowedOrigins = [
   'https://mesto.nomoredomainsrocks.ru',
   'http://mesto.nomoredomainsrocks.ru',
-  'http://localhost:5173',
+  // 'http://localhost:5173',
 ];
 
 const app = express();
