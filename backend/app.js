@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import express, { json } from 'express';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
