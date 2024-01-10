@@ -1,4 +1,4 @@
-<h1 align="center">Проект <a href="https://mesto.nomoredomainsrocks.ru" target="_blank" rel="noopener">Mesto</a></h1>
+<h1 align="center">Проект Mesto</h1>
 <br>
 
 <div align="center">
@@ -12,22 +12,14 @@
 
 <h2>2. Стек технологий</h2>
 <div>
-  <img src="https://img.shields.io/badge/javascript-yellow?style=for-the-badge&logo=javascript&logoColor=white
-  " alt="иконка javaScript">
-  <img src="https://img.shields.io/badge/react-%23087ea4?style=for-the-badge&logo=react&logoColor=white
-  " alt="иконка react">
-  <img src="https://img.shields.io/badge/node.js-026e00?style=for-the-badge&logo=node.js&logoColor=white
-  " alt="иконка node.js">
-  <img src="https://img.shields.io/badge/express-black?style=for-the-badge&logo=express&logoColor=white
-  " alt="иконка express">
-  <img src="https://img.shields.io/badge/mongodb-00ED64?style=for-the-badge&logo=mongodb&logoColor=white
-  " alt="иконка mongoDB">
-  <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white
-  " alt="иконка nginx">
-  <img src="https://img.shields.io/badge/html-ff6739?style=for-the-badge&logo=html5&logoColor=white
-  " alt="иконка html">
-  <img src="https://img.shields.io/badge/css-blue?style=for-the-badge&logo=css3&logoColor=white
-  " alt="иконка css">
+  <img src="https://img.shields.io/badge/javascript-yellow?style=for-the-badge&logo=javascript&logoColor=white" alt="иконка javaScript">
+  <img src="https://img.shields.io/badge/react-%23087ea4?style=for-the-badge&logo=react&logoColor=white" alt="иконка react">
+  <img src="https://img.shields.io/badge/node.js-026e00?style=for-the-badge&logo=node.js&logoColor=white" alt="иконка node.js">
+  <img src="https://img.shields.io/badge/express-black?style=for-the-badge&logo=express&logoColor=white" alt="иконка express">
+  <img src="https://img.shields.io/badge/mongodb-00ED64?style=for-the-badge&logo=mongodb&logoColor=white" alt="иконка mongoDB">
+  <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="иконка nginx">
+  <img src="https://img.shields.io/badge/html-ff6739?style=for-the-badge&logo=html5&logoColor=white" alt="иконка html">
+  <img src="https://img.shields.io/badge/css-blue?style=for-the-badge&logo=css3&logoColor=white" alt="иконка css">
 </div>
 
 <h2>3. Процесс создания</h2>
