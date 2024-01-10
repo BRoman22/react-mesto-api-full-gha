@@ -3,7 +3,7 @@
 
 <div align="center">
   <a href="https://mesto.nomoredomainsrocks.ru">
-    <img width="575" alt="Основной функционал приложения" src="https://github.com/BRoman22/react-mesto-api-full-gha/assets/96336622/476466ba-ee1c-4b71-9683-5fe838f332e3">
+    <img width="600" alt="Основной функционал приложения" src="https://github.com/BRoman22/react-mesto-api-full-gha/assets/96336622/b74004b2-3433-4baf-8701-f0083e55e3c7">
   </a>
 </div>
 
